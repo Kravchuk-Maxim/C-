@@ -1,0 +1,36 @@
+1)
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a = 3.0, b = 0.521 ;
+
+    double numerator = pow(0.127 * exp(b / a), 2);
+    double denominator = 1 - cbrt(cos((b / a) * M_PI));
+    double y = cbrt(numerator / denominator);
+
+    cout << fixed << y << endl;
+
+  
+}
+
+2)
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a = 2.0, b = 19.03;
+    double numerator = 4.3 * sin(((a + 1) * M_PI) / b);
+    double denominator = 1 - cos(((a - 1) * M_PI) / b);
+    double y = (numerator / denominator) + log(b);
+    cout << y;
+}
+
+
+
+
+  
+}
+
