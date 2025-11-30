@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cout << "Enter a three-digit number N: ";
+    cin >> N;
+
+    int a = N / 100;
+    int b = (N / 10) % 10;
+    int c = N % 10;
+
+    int count = 0;
+
+    if (a < 7) count++;
+    if (b < 7) count++;
+    if (c < 7) count++;
+
+    cout << "Count of digits less than 7: " << count << endl;
+
+  
+}
+
