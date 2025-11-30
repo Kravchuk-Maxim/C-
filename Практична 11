@@ -1,0 +1,79 @@
+#include <iostream>
+using std::cout; using std::cin;
+int SkipTo=1;
+_____________(1 та 2 )________________________
+
+int main() {
+
+if (SkipTo==1) {
+
+struct Date {
+int Hour;
+int Minute;
+int MinuteIncrease;
+};
+
+Date WorkingDate;
+cout<<"Provide hour from 0 to 24 (under 0 or above 23 will be automatially changed: ";
+cin >> WorkingDate.Hour; 
+if (WorkingDate.Hour<0) {WorkingDate.Hour=0;} else if (WorkingDate.Hour>23) {WorkingDate.Hour=23;} 
+cout<<"Same thing with minutes but from 0 to 60 now: ";
+cin >> WorkingDate.Minute;
+if (WorkingDate.Minute<0) {WorkingDate.Minute=0;} else if (WorkingDate.Minute>59) {WorkingDate.Minute=59;} 
+cout<<"Provide an increase to the current time now (in minutes): ";
+cin >> WorkingDate.MinuteIncrease;
+
+int MinutesRemainder=WorkingDate.MinuteIncrease%60;
+int ExtraHours = ((WorkingDate.MinuteIncrease-MinutesRemainder)/60);
+
+WorkingDate.Minute+=MinutesRemainder; 
+if (WorkingDate.Minute>=60) {WorkingDate.Minute-=60; WorkingDate.Hour++;}
+
+int NewHoursAmount = (WorkingDate.Hour+ExtraHours)%24;
+WorkingDate.Hour = NewHoursAmount;
+ 
+cout << WorkingDate.Hour<<":"<<WorkingDate.Minute;
+
+
+
+}
+
+if (SkipTo==2) {
+
+ struct Date {
+int StartHour;
+int StartMinute;
+int EndHour;
+int EndMinute;
+};
+Date WorkingDate;
+
+cout << "Starting Hour: "; cin>>WorkingDate.StartHour;
+cout << "Starting Minute: "; cin>>WorkingDate.StartMinute;
+cout << "End Hour: "; cin>>WorkingDate.EndHour;
+cout << "End minute: "; cin>>WorkingDate.EndMinute;
+
+if (WorkingDate.StartHour<0) {WorkingDate.StartHour=0;} else if (WorkingDate.StartHour>24) {WorkingDate.StartHour=24;} 
+if (WorkingDate.StartMinute<0) {WorkingDate.StartMinute=0;} else if (WorkingDate.StartMinute>59) {WorkingDate.StartMinute=59;}
+if (WorkingDate.EndHour<0) {WorkingDate.EndHour=0;} else if (WorkingDate.EndHour>24) {WorkingDate.EndHour=24;} 
+if (WorkingDate.EndMinute<0) {WorkingDate.EndMinute=0;} else if (WorkingDate.EndMinute>59) {WorkingDate.EndMinute=59;} 
+ 
+int StartingTimeInMinutes;
+int EndTimeInMinutes;
+StartingTimeInMinutes = (WorkingDate.StartHour*60)+WorkingDate.StartMinute;
+EndTimeInMinutes = (WorkingDate.EndHour*60)+WorkingDate.EndMinute;
+
+int OffsetToZero = (60*24)-StartingTimeInMinutes;
+
+EndTimeInMinutes += OffsetToZero;
+
+int EndHour; int EndMinuteRemainder;
+EndMinuteRemainder = (EndTimeInMinutes%60);
+EndHour = ((EndTimeInMinutes-EndMinuteRemainder)/60);
+
+EndHour%=24; 
+cout << EndHour<<":"<<EndMinuteRemainder;
+ 
+}
+
+}
