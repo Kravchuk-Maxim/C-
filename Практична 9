@@ -1,0 +1,128 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using std::cout; using std::cin;
+int SkipTo=5;
+//3,4,5,6
+
+int main() {
+ 
+//ЗАВДАННЯ 3
+if (SkipTo==3) {
+
+srand(time(0));
+int RandomNumbers[5];
+
+cout << "Previously: \n";
+for (int i=0;i<5;i++) {
+int rnumber = rand() % 50;
+RandomNumbers[i] = rnumber;
+cout << " "<<RandomNumbers[i]<<" ";
+}
+
+cout<<"\nNow:\n";
+int SmallestNum=RandomNumbers[0]; int SmallestNumIndex=0;
+int BiggestNum=RandomNumbers[0]; int BiggestNumIndex=0;
+
+for (int i=0;i<5;i++) {
+if (RandomNumbers[i]<SmallestNum) { SmallestNum=RandomNumbers[i]; SmallestNumIndex=i; }
+if (RandomNumbers[i]>BiggestNum) { BiggestNum=RandomNumbers[i]; BiggestNumIndex=i; }
+}
+
+RandomNumbers[SmallestNumIndex] = BiggestNum;
+RandomNumbers[BiggestNumIndex] = SmallestNum;
+
+for (int i=0;i<5;i++) { cout << " "<<RandomNumbers[i]<<" "; }
+
+}
+
+//ЗАВДАННЯ 4
+if (SkipTo==4) {
+
+srand(time(0));
+int RandomNumbers[5];
+int ProvidedNumber=0; int BiggerThanProvided=0;
+
+cout << "Table: \n";
+for (int i=0;i<5;i++) {
+int rnumber = rand() % 50;
+RandomNumbers[i] = rnumber;
+cout << " "<<RandomNumbers[i]<<" ";
+}
+cout << "\nProvide a number up to 50 please \n";
+cin >> ProvidedNumber;
+if (ProvidedNumber>50) {ProvidedNumber=50;}
+
+for (int i=0;i<5;i++) { if (RandomNumbers[i]>ProvidedNumber) BiggerThanProvided++; }
+cout << "Amount of numbers in the array that are bigger than "<<ProvidedNumber<<" is "<<BiggerThanProvided;
+
+}
+
+//ЗАВДАННЯ 5
+if (SkipTo==5) {
+ 
+srand(time(0));
+int RandomNumbers[5];
+
+cout << "Table: \n";
+for (int i=0;i<5;i++) {
+int rnumber = rand() % 50;
+RandomNumbers[i] = rnumber; 
+cout << " "<<RandomNumbers[i]<<" ";
+}
+
+int inumber; int jnumber;
+
+for (int i=0;i<5;i++) {
+int UsedNumber=RandomNumbers[i];
+
+for (int j=0;j<5;j++) { 
+if (j==i) { continue; }
+if (UsedNumber>RandomNumbers[j]) { 
+
+inumber=RandomNumbers[i];
+jnumber=RandomNumbers[j];
+
+RandomNumbers[i]=jnumber;
+RandomNumbers[j]=inumber;
+} 
+}
+
+}
+cout<<"\n";
+for (int i=0;i<5;i++) { cout<<" "<<RandomNumbers[i]<<" "; } cout<<" (from highest to lowest ordered) \n";
+cout<<"Second highest value in the array: ";
+for (int i=0;i<5;i++) 
+{ 
+if ((i+1) == 5) { cout<<"There's no 2nd highest value in the array"; break; }
+if (RandomNumbers[i]!=RandomNumbers[(i+1)] ) { 
+cout<<RandomNumbers[(i+1)]; break;
+}
+}
+
+}
+
+//ЗАВДАННЯ 6
+if (SkipTo==6) {
+
+srand(time(0));
+int RandomNumbers[5];
+int Index; bool ZeroFound=false;
+
+cout << "Table: \n";
+for (int i=0;i<5;i++) {
+int rnumber = rand() % 5;
+RandomNumbers[i] = rnumber;
+cout << " "<<RandomNumbers[i]<<" ";
+} 
+
+for (int i=0;i<5;i++) { if (RandomNumbers[i]==0) { Index=i;; ZeroFound=true; break; } }
+
+if (ZeroFound==false) {
+cout<<"\n No elements equaling 0 were found in the array";
+}
+else { cout<<"\n Found 0 on the index "<<Index; }
+
+}
+
+}
