@@ -1,0 +1,54 @@
+1)
+#include <iostream>
+#include <cmath>    // Для функцій sin() та cos()
+
+int main() {
+    double x, y;
+    double gamma;  // Змінна для γ
+
+    // Введення значення x
+    std::cout << "Enter x: ";
+    std::cin >> x;
+
+    // Введення значення γ
+    std::cout << "Enter gamma (in radians): ";
+    std::cin >> gamma;
+
+    // Обчислення y по частинах
+    if (x < 0) { // Якщо x підходить зліва від нуля
+        y = x * x - sin(gamma);
+    } else if (x > 0) { // Якщо x > 0
+        y = x + cos(gamma);
+    } else {
+        std::cout << "y не визначене для x = 0" << std::endl;
+        return 0;
+    }
+
+    // Виведення результату
+    std::cout << "y = " << y << std::endl;
+
+    return 0;
+}
+
+2)
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    double x, y; 
+
+    cout << "Enter x: ";
+    cin >> x;
+    cout << "Enter y: ";
+    cin >> y;
+
+   
+    if (x >= 0 && x <= 2 && y >= 0 && y <= 1) {
+        cout << "Point (" << x << ", " << y << ") is inside the rectangle." << endl;
+    } else {
+        cout << "Point (" << x << ", " << y << ") is outside the rectangle." << endl;
+    }
+
+    return 0;
+}
