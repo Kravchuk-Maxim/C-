@@ -1,0 +1,241 @@
+6)
+#include <iostream>
+using namespace std;
+
+int main() {
+    double x, y; // координати точки для перевірки
+
+    cout << "Enter x: ";
+    cin >> x;
+    cout << "Enter y: ";
+    cin >> y;
+
+    // Прямокутник: x ∈ [0,2], y ∈ [0,1]
+    if (x >= 0 && x <= 2 && y >= 0 && y <= 1) {
+        cout << "Point (" << x << ", " << y << ") is inside the rectangle." << endl;
+    } else {
+        cout << "Point (" << x << ", " << y << ") is outside the rectangle." << endl;
+    }
+
+    return 0;
+}
+
+
+6.2)
+
+#include <iostream>
+#include <string>
+#include <cstdlib>  // rand, srand
+#include <ctime>    // time
+#include <cmath>    // abs
+
+using namespace std;
+
+/*
+  isotope_sim.cpp
+
+ 
+
+string lab_mode(int isotope) {
+    // Проста версія: 115 — успіх; інші — повідомлення про провал/неуспіх
+    if (isotope == 115) {
+        return "Ununpentium 115 synthesized successfully!";
+    } else if (isotope < 0) {
+        return "Invalid input: isotope number must be non-negative.";
+    } else if (isotope < 115) {
+        return "Experiment failed: isotope unstable (too light).";
+    } else {
+        return "Experiment failed: isotope unstable (too heavy).";
+    }
+}
+
+string sim_mode(int isotope) {
+   
+    if (isotope < 0) return "Invalid input: isotope number must be non-negative.";
+
+    if (isotope == 115) {
+        return "Ununpentium 115 — special synthesis (paschal reference).";
+    }
+
+    if (isotope == 190 || isotope == 191) {
+        return "Isotope " + to_string(isotope) + " -> THEORETICAL increased stability (island-of-stability).";
+    }
+    
+    
+    int base = 100 - static_cast<int>(abs(isotope - 191));
+    int bonus115 = max(0, 15 - static_cast<int>(abs(isotope - 115)) / 4); // невеликий бонус за близькість до 115
+    int noise = (rand() % 21) - 10; // від -10 до +10
+
+    int score = base + bonus115 + noise;
+
+    // score >= 85 -> stable-ish
+    // 60 <= score < 85 -> metastable
+    // < 60 -> unstable
+    string classification;
+    if (score >= 85) classification = "STABLE (simulated)";
+    else if (score >= 60) classification = "METASTABLE (simulated)";
+    else classification = "UNSTABLE (simulated)";
+
+
+    string result = "Isotope " + to_string(isotope) + " -> " + classification
+                    + "  [score=" + to_string(score) + "]";
+    return result;
+}
+
+int main() {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    cout << "Select mode:\n"
+         << "  1) Simple lab mode (clean, for submission)\n"
+         << "  2) Simulation mode (playful, expanded behavior)\n"
+         << "Enter 1 or 2: ";
+    int mode;
+    if (!(cin >> mode)) {
+        cerr << "Invalid input. Exiting.\n";
+        return 1;
+    }
+
+    cout << "Enter isotope number: ";
+    int isotope;
+    if (!(cin >> isotope)) {
+        cerr << "Invalid isotope input. Exiting.\n";
+        return 1;
+    }
+
+    if (mode == 1) {
+        cout << lab_mode(isotope) << endl;
+    } else {
+        cout << sim_mode(isotope) << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+7)
+
+
+#include <iostream>
+#include <iomanip>  // для fixed, setprecision
+using namespace std;
+
+int main() {
+  
+    float a = 2.3;
+    float b = 2.3;
+    double c = 2.123456;
+    double d = 2.123456;
+    double e = 2.123456;
+
+    // Вивід згідно завдання
+    cout << a << endl;                      // 2.3
+    cout << fixed << setprecision(2) << b << endl; // 2.30
+    cout << setprecision(6) << c << endl;   // 2.123456
+    cout << fixed << setprecision(2) << d << endl; // 2.12
+    cout << fixed << setprecision(0) << e << endl; // 2
+
+    return 0;
+}
+
+
+
+
+8)
+
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double num1, num2;
+    const double epsilon = 0.000001;
+
+    cout << "Enter first number: ";
+    cin >> num1;
+
+    cout << "Enter second number: ";
+    cin >> num2;
+
+  
+    if (num1 == 0 || num2 == 0) {
+        cout << "Cannot divide by zero!" << endl;
+        return 1;
+    }
+
+    double result1 = 1.0 / num1;
+    double result2 = 1.0 / num2;
+
+    
+    bool mobius = false;
+    if ((abs(num1 - 3.14159) < epsilon && abs(num2 - 1.61803) < epsilon) ||
+        (abs(num1 - 1.61803) < epsilon && abs(num2 - 3.14159) < epsilon) ||
+        (abs(num1 - 2.0) < epsilon && abs(num2 - 2.0) < epsilon)) {
+        mobius = true;
+    }
+
+    
+    if (mobius == true) {
+        cout << "Comparing results (like a Mobius loop...)" << endl;
+    } else if (fabs(result1 - result2) <= epsilon) {
+        cout << "Results are equal (by 0.000001 epsilon)" << endl;
+    } else {
+        cout << "Results are not equal (by 0.000001 epsilon)" << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+
+9)
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, c, d;
+
+    cout << "Enter first number (0-255): ";
+    if (!(cin >> a)) {
+        cerr << "Invalid input\n";
+        return 1;
+    }
+    cout << "Enter second number (0-255): ";
+    if (!(cin >> b)) {
+        cerr << "Invalid input\n";
+        return 1;
+    }
+    cout << "Enter third number (0-255): ";
+    if (!(cin >> c)) {
+        cerr << "Invalid input\n";
+        return 1;
+    }
+    cout << "Enter fourth number (0-255): ";
+    if (!(cin >> d)) {
+        cerr << "Invalid input\n";
+        return 1;
+    }
+
+  
+    if (a < 0 || a > 255 || b < 0 || b > 255 || c < 0 || c > 255 || d < 0 || d > 255) {
+        cout << "Invalid IP number! Each value must be between 0 and 255." << endl;
+        return 1;
+    }
+
+
+    if (a == 192 && b == 168 && c == 0 && d == 3) {
+        cout << "A zvidky ty znayesh moyu IP-adressu?" << endl;
+    }
+
+    cout << a << "." << b << "." << c << "." << d << endl;
+
+    return 0;
+}
