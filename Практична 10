@@ -1,0 +1,123 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using std::cout; using std::cin;
+int SkipTo=1;
+//1,15
+
+int main() {
+
+____________________(1-6)
+
+
+if (SkipTo==1) {
+int Array[4][3];
+srand(time(0));
+
+cout<<"Starting array: \n";
+for (int row=0;row<4;row++) {
+cout<<"{ ";
+for (int column=0;column<3;column++) {
+int rnumber1=rand() % 10;
+Array[row][column]=rnumber1;
+cout << " "<<rnumber1<<" ";
+}
+cout<<" }\n";
+}
+
+int PairNumbersInRows[4]={0,0,0,0};
+int PairNumbersInColumns[3]={0,0,0};
+int ForSumInARow[4]={0,0,0,0}; int ForSumInAColumn[3]={0,0,0};
+int MaxValue=Array[0][0]; int MinValue=Array[0][0];
+
+cout<<"Pair numbers in rows and columns:";
+for (int row=0;row<4;row++) {
+for (int column=0;column<3;column++) {
+if ( Array[row][column] % 2 == 0 ) { PairNumbersInRows[row]+=1; }
+}
+}
+cout<<"\n"; 
+for (int i=0;i<4;i++) { cout<<"row "<<(i+1)<<": "<<PairNumbersInRows[i]<<"  "; }
+
+
+for (int column=0;column<3;column++) {
+for (int row=0;row<4;row++) {
+if ( Array[row][column] % 2 == 0 ) { PairNumbersInColumns[column]+=1; }
+}
+}
+cout<<"\n"; 
+for (int i=0;i<3;i++) { cout<<"column "<<(i+1)<<": "<<PairNumbersInColumns[i]<<"  "; }
+cout<<"\n\n";
+
+
+cout<<"Sum in each row and column: \n";
+for (int row=0;row<4;row++) {
+for (int column=0;column<3;column++) {
+ForSumInARow[row]+=Array[row][column];
+}
+}
+for (int i=0;i<4;i++) { cout<<"Sum in row "<<(i+1)<<": "<<ForSumInARow[i]<<"  "; } 
+cout<<"\n";
+
+
+
+for (int column=0;column<3;column++) {
+for (int row=0;row<4;row++) {
+ForSumInAColumn[column]+=Array[row][column];
+}
+}
+for (int i=0;i<3;i++) { cout<<"Sum in column "<<(i+1)<<": "<<ForSumInAColumn[i]<<"  "; }
+cout<<"\n\n";
+
+
+//найбільше та найменше число масива
+for (int row=0;row<4;row++) {
+for (int column=0;column<3;column++) {
+if (Array[row][column] < MinValue) { MinValue=Array[row][column]; }
+if (Array[row][column] > MaxValue) { MaxValue=Array[row][column]; }
+}
+}
+cout<<"Highest number in table: "<<MaxValue; cout<<"\n";
+cout<<"Lowest number in table: "<<MinValue;
+
+}
+
+_____________________ 15)
+
+if (SkipTo==15) {
+
+int Array[3][3];
+srand(time(0));
+int MainDiagonalSum=0;
+int SecondaryDiagonalSum=0;
+
+cout<<"Starting array: \n";
+for (int row=0;row<3;row++) {
+cout<<"{ ";
+for (int column=0;column<3;column++) {
+int rnumber1=rand() % 10;
+Array[row][column]=rnumber1;
+cout << " "<<rnumber1<<" ";
+}
+cout<<" }\n";
+}
+
+
+for (int i=0;i<3;i++) {
+MainDiagonalSum+=Array[i][i];
+}
+cout << "Main diagonal sum is: "<<MainDiagonalSum; cout<<"\n";
+
+\\\\\\\\\\\\\\Другорядна діагональ
+
+int StartingRow=2; int StartingColumn=0;
+for (int i=0;i<3;i++) {
+int ReverseDiagonalRow = (StartingRow-i);
+int ReverseDiagonalColumn = (StartingColumn+i);
+SecondaryDiagonalSum+=Array[ReverseDiagonalRow][ReverseDiagonalColumn];
+}
+cout << "Secondary diagonal sum is: "<<SecondaryDiagonalSum;
+
+}
+
+}
