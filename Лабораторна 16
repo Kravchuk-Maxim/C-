@@ -1,0 +1,102 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+
+struct Date {
+int year;
+int month;
+int day;
+};
+
+Date Today() {
+time_t CurrentTimeInSeconds = time(NULL);
+tm LocalDate = *localtime(&CurrentTimeInSeconds);
+    
+Date CurrentDate;
+CurrentDate.year = LocalDate.tm_year+1900;
+CurrentDate.month = LocalDate.tm_mon+1;
+CurrentDate.day = LocalDate.tm_mday;
+return CurrentDate;
+}
+
+Date Birthday() {
+Date BirthdayDate;
+BirthdayDate.year = 2008;
+BirthdayDate.month = 5;
+BirthdayDate.day = 4;
+return BirthdayDate;
+}
+
+int isLeap(int year) {
+    if (year%4 == 0) { return 366; } else { return 365; }
+}
+
+int monthLength(int year, int month) {
+ 
+int YearToMonth[13]=
+{
+0, //для красоти щоб параметер month співпадав з індексацією у кожному кейсі а не 1 місяць=0, 2 місяць=1 і т.д
+31, //1
+28, //2
+31, //3
+30, //4
+31, //5
+30, //6
+31, //7
+31, //8
+30, //9
+31, //10
+30, //11
+31, //12
+};
+ 
+switch(month) {
+case 1: return YearToMonth[1];
+case 2: if (year%4==0) { return 29; } else { return YearToMonth[2]; };
+case 3: return YearToMonth[3];
+case 4: return YearToMonth[4];
+case 5: return YearToMonth[5];
+case 6: return YearToMonth[6];
+case 7: return YearToMonth[7];
+case 8: return YearToMonth[8];
+case 9: return YearToMonth[9];
+case 10: return YearToMonth[10];
+case 11: return YearToMonth[11];
+case 12: return YearToMonth[12];
+}
+return 0;
+}
+
+//ЗАПУСК ПРОГРАМИ
+int main(void){
+
+int DaysFromBirthday=0;
+Date CurrentDate = Today();
+Date BirthdayDate = Birthday();
+
+//НАГАДУВАННЯ ДЛЯ САМОГО СЕБЕ: НЕ ВИКОРИСТОВУВАТИ <= А < БО ТЕПЕРІШНІЙ РІК НЕ МОЖНА ВКЛЮЧИТИ ЯК 365 АБО 366 ЯКЩО ВІН ЩЕ НЕ ЗАКІНЧИВСЯ
+//те саме з місяцями, для теперішнього місяця просто використовувати += .day а для року пройтись по кожному місяцю окрім теперішнього
+
+// Додати 365 або 366 днів з кожного року до змінної відштовхуючись від того чи рік високосний чи ні
+for (int i=BirthdayDate.year;i<CurrentDate.year;i++) {
+DaysFromBirthday += isLeap(i);
+//cout << i<<" : "<<isLeap(i)<<"\n";
+}
+
+//Підправити змінну за допомогою видалення кількості днів які пройшли з початку дати народження бо народження може бути наприклад 30 грудня 2008
+//то всі дні у 2008 році до 30 грудня мають бути прибрані
+for (int i=1;i<BirthdayDate.month;i++) {
+DaysFromBirthday -= monthLength(BirthdayDate.year,i);
+}
+DaysFromBirthday -= BirthdayDate.day;
+
+//Підправити змінну за допомогою додання днів які пройшли в теперішньому році
+for (int i=1;i<CurrentDate.month;i++) {
+    DaysFromBirthday += monthLength(CurrentDate.year,i);
+}
+DaysFromBirthday += CurrentDate.day;
+
+
+cout << DaysFromBirthday;
+
+}
