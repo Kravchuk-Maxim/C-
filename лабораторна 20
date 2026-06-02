@@ -1,0 +1,133 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int Task=3;
+
+
+
+//КЛАСИ
+//КЛАСИ
+//КЛАСИ
+class Task1Person { 
+public: 
+string name; 
+string job; 
+string height;
+int age; 
+};
+
+
+
+class Square { 
+public: 
+Square(double side) { 
+    this->side=side;
+    this->area=(side*side);
+};
+void set_side(double side) {
+if (side>=0) {
+this->side=side;
+this->area=(side*side);
+} }
+void PrintSquareAttributes() {
+    cout<<" Square's side length: "<<this->side<<", Square's area: "<<this->area<<"\n";
+}
+private: 
+double side; 
+double area; 
+};
+
+
+
+class AdHocSquare {
+public:
+void set_side(double side) { 
+this->side = side; 
+};
+double get_area() { 
+return (this->side*this->side); 
+};
+private:
+double side;
+};
+
+
+
+class LazySquare {
+public:
+
+void set_side(double side) { 
+int OldSide=this->side; 
+this->side = side; 
+if (OldSide!=side) { 
+this->side_changed=true; 
+} };
+
+double get_area() { 
+if ( (this->side_changed)==true) {
+cout<<"[C]"; this->side_changed=false; this->area=(this->side*this->side); return this->area; 
+}
+else 
+{ cout<<"[R]"; return this->area; }
+};
+
+private:
+double side;
+double area;
+bool side_changed;
+};
+
+
+
+//ФУНКЦІЇ
+//ФУНКЦІЇ
+//ФУНКЦІЇ
+void PrintGreeting(Task1Person* person) { 
+    cout<<"Meet "<<person->name<<"\n";
+    cout << person->name<<" is "<<person->age<<" years old and their height is "<<person->height<<"\n";
+}
+
+//ЗАПУСК ПРОГРАМИ
+//ЗАПУСК ПРОГРАМИ
+//ЗАПУСК ПРОГРАМИ
+int main(void){
+
+if (Task==1) {
+Task1Person person1; person1.name = "Harry"; person1.age = 23; person1.job = "Engineer"; person1.height="174cm"; PrintGreeting(&person1);
+Task1Person person2; person2.name = "Thomas"; person2.age = 26; person2.job = "Taxi Driver"; person2.height="145cm"; PrintGreeting(&person2);
+Task1Person person3; person3.name = "Alexander"; person3.age = 36; person3.job = "Chef"; person3.height="157cm"; PrintGreeting(&person3);
+}
+
+else if (Task==2) {
+Square FirstSquare(4);
+FirstSquare.PrintSquareAttributes();
+FirstSquare.set_side(-5);
+FirstSquare.PrintSquareAttributes();
+FirstSquare.set_side(7);
+FirstSquare.PrintSquareAttributes();
+}
+else if (Task==3) {
+    
+//3.1. за методикою що площа не зберігається в об'єкті а має функцію для обрахунку side*side а потім повернення фінального результату цього обрахунку
+
+AdHocSquare SecondSquare;
+SecondSquare.set_side(3);
+cout<<"AdHoc(whatever that means) square has area of "<< SecondSquare.get_area()<<"\n\n";
+
+//3.2. за методикою що площа обраховується якщо side_changed булін дорівнює тру а в іншому випадку повертається поле area з приматного модифікатора
+
+cout << "Now for lazy square: ([C] means that area was caculated and [R] means that area was returned) \n";
+LazySquare ThirdSquare;
+ThirdSquare.set_side(4);
+cout<<"lazy square's area equals "<<ThirdSquare.get_area()<<" after set_side(4) was done\n";
+ThirdSquare.set_side(5);
+cout<<"now the side length was set to 5 so should be [C] still, area equals to "<<ThirdSquare.get_area()<<"\n";
+ThirdSquare.set_side(5);
+cout<<"set it to 5 again, now should be [R] instead, area equals to "<<ThirdSquare.get_area();
+}
+
+
+
+}
