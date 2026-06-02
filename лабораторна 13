@@ -1,0 +1,54 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+int main() {
+
+srand(time(0));
+const int Scale = 3;
+int table[Scale][Scale] = {};
+int *FirstElementAddress = *table;
+int TotalElements = pow(Scale,2);
+
+//1. Заповнення масиву випадковими числами
+cout << "Table :\n";
+for (int Iterations=0;Iterations<TotalElements;Iterations++) {
+    
+if (Iterations%Scale==0 && Iterations!=0) { cout<<"\n"; } 
+
+int *ElementAddress = (FirstElementAddress+Iterations);
+*ElementAddress = rand()%10;
+cout << *ElementAddress<<" ";
+
+}
+
+cout << "\nNumbers in main diagonal: \n";
+int FirstOffset = 0;
+for (int Iterations=0;Iterations<TotalElements;Iterations+=Scale) {
+    int *ElementAddress = FirstElementAddress+Iterations+FirstOffset;
+    cout << *ElementAddress<<" "; 
+    FirstOffset++;
+}
+
+cout << "\nNumbers in secondary diagonal: \n";
+int SecondOffset = (Scale-1);
+for (int Iterations=0;Iterations<TotalElements;Iterations+=Scale) {
+    int *ElementAddress = FirstElementAddress+Iterations+SecondOffset;
+    cout << *ElementAddress<<" "; 
+    SecondOffset--;
+}
+
+//4. Вивід парних та непарних чисел
+cout << "\nOdd and even numbers amount: \n";
+int OddNumbers=0;
+int EvenNumbers=0;
+for (int Iterations=0;Iterations<TotalElements;Iterations++) {
+    
+int *ElementAddress = FirstElementAddress+Iterations;
+if (*ElementAddress%2==0) {EvenNumbers++;} else {OddNumbers++;}
+
+}
+cout << "Even: "<<EvenNumbers<<"\n";
+cout << "Odd: "<<OddNumbers<<"\n";
+}
